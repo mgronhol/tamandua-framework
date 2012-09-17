@@ -1,20 +1,20 @@
 CC=gcc
-FLAGS=-Os -pedantic -Wall
+FLAGS=-Os -pedantic -Wall -I ./includes/
 
 all: EventEngine WorkflowEngine Utils test
 
 
 test: EventEngine WorkflowEngine Utils
-	$(CC) $(FLAGS) main.c -o main eventengine.o workflowengine.o utils.o
+	$(CC) $(FLAGS) src/main.c -o main src/eventengine.o src/workflowengine.o src/utils.o
 
-EventEngine: EventEngine.c
-	$(CC) $(FLAGS) -c EventEngine.c -o eventengine.o
+EventEngine: src/EventEngine.c
+	$(CC) $(FLAGS) -c src/EventEngine.c -o src/eventengine.o
 	
-WorkflowEngine: WorkflowEngine.c
-	$(CC) $(FLAGS) -c WorkflowEngine.c -o workflowengine.o
+WorkflowEngine: src/WorkflowEngine.c
+	$(CC) $(FLAGS) -c src/WorkflowEngine.c -o src/workflowengine.o
 
-Utils: Utils.c
-	$(CC) $(FLAGS) -c Utils.c -o utils.o
+Utils: src/Utils.c
+	$(CC) $(FLAGS) -c src/Utils.c -o src/utils.o
 
 clean:
-	rm *.o main
+	rm src/*.o main
