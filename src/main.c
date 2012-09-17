@@ -4,8 +4,11 @@
 
 #include "EventEngine.h"
 #include "WorkflowEngine.h"
+#include "Emulator.h"
 
+#include <time.h>
 
+/*
 void* wf_step1( void *engine, void *param ){
 	int number;
 	printf( "Give number: " );
@@ -22,7 +25,7 @@ void* wf_step2( void *engine, void *param ){
 	printf( "Sum is %d \n", (int)param );
 	return NULL;
 	}
-
+*/
 int main( int argc, char **argv ){
 	/*
 	workflow_engine_t wf;
@@ -37,8 +40,20 @@ int main( int argc, char **argv ){
 		}
 	*/
 	
+	/*
 	printf( "Size of EventEngine:    %d bytes \n", sizeof( event_engine_t ) );
 	printf( "Size of WorkflowEngine: %d bytes \n", sizeof( workflow_engine_t ) );
+	*/
+	
+	device_t *portA = emulator_portA_init();
+	device_t *portB = emulator_portB_init();
+	
+	while( 1 ){
+		int value = (int)portA->read( NULL, EMU_READ_ALL );
+		printf( "%d \n", value ); 
+		sleep( 1 );
+		portB->write( EMU_WRITE_ALL, (int)(value + 1) );
+		}
 	
 	
 	return 0;

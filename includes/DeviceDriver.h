@@ -17,7 +17,7 @@ typedef struct {
 	} device_t;
 
 
-device_t* device_init( uint16_t device_id );
+/* device_t* device_init( uint16_t device_id ); */
 
 
 
